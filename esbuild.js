@@ -19,7 +19,7 @@ const setExternals = {
 };
 
 // Empty directory before build
-fs.rmdirSync("out", { recursive: true });
+fs.rmSync("out", { recursive: true });
 
 esbuild.build({
   entryPoints: ["src/extension.ts"],
