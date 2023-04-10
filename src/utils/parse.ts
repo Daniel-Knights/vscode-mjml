@@ -1,8 +1,8 @@
-import { TextDocument, Position } from 'vscode'
+import { TextDocument, Position } from "vscode";
 
-type Delimiters = { start: string; end: string }
-type TagIndex = { startIndex: number; endIndex: number }
-type NodeIndex = { nodeStart: TagIndex; nodeEnd: TagIndex }
+type Delimiters = { start: string; end: string };
+type TagIndex = { startIndex: number; endIndex: number };
+type NodeIndex = { nodeStart: TagIndex; nodeEnd: TagIndex };
 
 /**
  * Determines if the given position is within any matched portion of text.
@@ -10,27 +10,27 @@ type NodeIndex = { nodeStart: TagIndex; nodeEnd: TagIndex }
 export function isWithinRegex(
   document: TextDocument,
   position: Position,
-  regex: RegExp,
+  regex: RegExp
 ): boolean {
-  const docText = document.getText()
-  const matches = [...docText.matchAll(regex)]
+  const docText = document.getText();
+  const matches = [...docText.matchAll(regex)];
 
-  if (!matches) return false
+  if (!matches) return false;
 
-  const offset = document.offsetAt(position)
+  const offset = document.offsetAt(position);
 
-  let isWithin = false
+  let isWithin = false;
 
   matches.forEach((block) => {
-    if (isWithin) return
+    if (isWithin) return;
 
-    const blockIndex = block.index || docText.indexOf(block[0])
-    const blockLength = blockIndex + block[0].length
+    const blockIndex = block.index || docText.indexOf(block[0]);
+    const blockLength = blockIndex + block[0].length;
 
-    isWithin = offset >= blockIndex && offset <= blockLength
-  })
+    isWithin = offset >= blockIndex && offset <= blockLength;
+  });
 
-  return isWithin
+  return isWithin;
 }
 
 /**
@@ -43,29 +43,32 @@ export function isWithinRegex(
  */
 export function getTagIndexes(
   matchString: string,
-  delimiters: Delimiters,
+  delimiters: Delimiters
 ): NodeIndex | void {
-  const { start, end } = delimiters
-  const iterator = new RegExp(`${start}|${end}`, 'g')
+  const { start, end } = delimiters;
+  const iterator = new RegExp(`${start}|${end}`, "g");
 
-  let openTokens = 0
-  let nodeStart
-  let match
+  let openTokens = 0;
+  let nodeStart;
+  let match;
 
   while ((match = iterator.exec(matchString))) {
     if (new RegExp(delimiters.start).test(match[0])) {
       if (!openTokens) {
-        nodeStart = { startIndex: match.index, endIndex: iterator.lastIndex }
+        nodeStart = { startIndex: match.index, endIndex: iterator.lastIndex };
       }
 
-      openTokens += 1
+      openTokens += 1;
     } else if (openTokens) {
-      openTokens -= 1
+      openTokens -= 1;
 
       if (!openTokens && nodeStart) {
-        const nodeEnd = { startIndex: match.index, endIndex: iterator.lastIndex }
+        const nodeEnd = {
+          startIndex: match.index,
+          endIndex: iterator.lastIndex,
+        };
 
-        return { nodeStart, nodeEnd }
+        return { nodeStart, nodeEnd };
       }
     }
   }

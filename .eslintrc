@@ -12,7 +12,6 @@
     "@typescript-eslint/semi": "off",
     "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "warn",
-    "@typescript-eslint/ban-ts-comment": "off",
 
     "no-debugger": "error",
     "arrow-parens": "warn",
@@ -23,8 +22,6 @@
     "no-return-await": "warn",
     "prefer-const": "warn",
     "no-unneeded-ternary": "warn",
-    "no-throw-literal": "warn",
-    "semi": "off",
-    "no-useless-escape": "off"
+    "no-throw-literal": "warn"
   }
 }
