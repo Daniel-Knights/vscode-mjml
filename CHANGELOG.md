@@ -3,6 +3,10 @@
 All notable changes to the "mjml" extension will be documented in this file.
 This project adheres to [Semantic Versioning](https://semver.org/).
 
+### [2.4.12] (10/04/2023)
+
+Bump deps.
+
 ### [2.4.10] (18/11/2021)
 
 Fix file links on Windows.
