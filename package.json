@@ -186,7 +186,7 @@
     "build": "node esbuild.js",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "lint": "npx eslint . --ext .js,.ts",
+    "lint": "eslint . --ext .js,.ts",
     "checks": "npm run lint && npm run compile",
     "pub": "npm run checks && vsce publish patch",
     "pub-minor": "npm run checks && vsce publish minor",
