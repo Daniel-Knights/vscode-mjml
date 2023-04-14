@@ -2,7 +2,7 @@
   "name": "vscode-mjml",
   "displayName": "MJML (unofficial fork)",
   "description": "MJML preview, lint, compile for Visual Studio Code.",
-  "version": "2.4.12",
+  "version": "2.4.13",
   "publisher": "DanielKnights",
   "license": "MIT",
   "readme": "README.md",
